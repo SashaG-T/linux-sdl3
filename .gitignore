@@ -13,6 +13,7 @@ CMakeUserPresets.json
 
 /debug/
 /build/
+/vendored/
 
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
