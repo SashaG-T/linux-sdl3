@@ -129,42 +129,11 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 /* This function runs once per frame, and is the heart of the program. */
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-/*
-
-
-
-    SDL_GetRenderOutputSize(renderer, &w, &h);
-    SDL_SetRenderScale(renderer, scale, scale);
-    x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(message)) / 2;
-    y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
-
-
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderDebugText(renderer, x, y, message);
-    SDL_RenderPresent(renderer);
-*/
-
     Time_Update();
 
-    char message[256] = {0};
-    snprintf(message, sizeof(message), "Time: %d", SDL_GetTicks());
-    message[255] = 0;
-    int w = 0, h = 0;
-    float x, y;
-    const float scale = 4.0f;
-    SDL_GetRenderOutputSize(renderer, &w, &h);
-    SDL_SetRenderScale(renderer, scale, scale);
-    x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(message)) / 2;
-    y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     //Handle Objects
-    //puts("Handling Objects");
-    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderDebugText(renderer, x, y, message);
+    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
     CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, render)); //render
     SDL_RenderPresent(renderer);
 

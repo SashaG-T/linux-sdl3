@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL3/SDL.h>
-
-extern SDL_Renderer* renderer;
+#include "global.h"
 
 int load_png_rgba(const char* filename, unsigned char** pixels, unsigned* width, unsigned* height) {
 
