@@ -10,13 +10,14 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # This assumes the SDL source is available in vendored/SDL
 add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
+add_subdirectory(vendored/chash)
 
 # Create your game executable target as usual
-add_executable(game main.c unittest.c time.c vector.c transform.c object.c list.c sprite.c scene.c)
+add_executable(game main.c unittest.c array.c time.c vector.c transform.c object.c list.c texture.c sprite.c scene.c)
 
 # Link to the actual SDL3 library.
 target_link_libraries(game 
-	PRIVATE SDL3::SDL3 png z m
+	PRIVATE SDL3::SDL3 png z m chash
 )
 
 target_compile_features(game PRIVATE c_std_11)

@@ -3,13 +3,14 @@
 
 #include "object.h"
 #include <SDL3/SDL.h>
+#include "texture.h"
 
 struct Sprite {
   struct Object object;
-  SDL_Texture* texture;
+  struct Texture* texture;
   int i;
 };
 
-struct Sprite* Sprite_Create(char* filename);
+struct Sprite* Sprite_Create(struct Texture* texture);
 
 #endif

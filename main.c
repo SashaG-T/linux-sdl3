@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "scene.h"
 #include "time.h"
+#include "texture.h"
 
 #include "unittest.h"
 
@@ -93,6 +94,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     }
 
     Time_Init();
+    Texture_Init();
     Object_InitRoot();
     Object_SetParent(Scene_CreateTestScene(), 0);
 
@@ -147,12 +149,15 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     //Make sure transforms are clean
     CleanTransforms(rootObjPtr, 0);
 
+    #warning TODO: Destroy textures with refCount 0.
+
     return SDL_APP_CONTINUE;
 }
 
 /* This function runs once at shutdown. */
 void SDL_AppQuit(void *appstate, SDL_AppResult result)
 {
+    Texture_Cleanup();
 }
 
 
