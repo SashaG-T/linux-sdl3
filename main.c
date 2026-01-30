@@ -124,7 +124,14 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     if (event->type == SDL_EVENT_KEY_DOWN ||
         event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
-    }	
+    }
+    #warning On video context change reload all textures
+    //SDL_EVENT_RENDER_DEVICE_RESET
+    //  - Destroy SDL_Renderer, SDL_Textures & Regen\load textures
+    //SDL_EVENT_RENDER_TARGETS_RESET
+    //  - Must redraw textures created using SDL_TEXTUREACCESS_TARGET (no need to destroy them... just redraw)
+    //SDL_EVENT_WINDOW_RESIZED / SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED
+    //  - Typically fine.. but if images rely on size then regen them.
     return SDL_APP_CONTINUE;
 }
 
