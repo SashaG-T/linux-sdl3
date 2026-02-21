@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "global.h"
+#include <assert.h>
 
 int load_png_rgba(const char* filename, unsigned char** pixels, unsigned* width, unsigned* height) {
 
@@ -133,4 +134,29 @@ struct Texture* Texture_LoadPNG(const char* filename) {
   texture->refCount = 1;
   Texture_DefaultReload(texture);
   return texture;
+}
+
+struct Texture* Texture_Generate(void* userdata, void (*reload)(struct Texture* texture), void (*destroy)(struct Texture* texture)) {
+
+  struct Texture* texture = Array_Expand(textureArray);
+  texture->userdata = userdata;
+  texture->texture = 0;
+  texture->reload = reload;
+  texture->destroy = destroy;
+  texture->refCount = 1;
+  reload(texture);
+  return texture;
+}
+
+void Texture_Reference(struct Texture* texture) {
+  assert(texture != 0);
+  texture->refCount++;
+}
+
+void Texture_Dereference(struct Texture* texture) {
+  assert(texture != 0);
+  if(--texture->refCount == 0) {
+    #warning nothing happens when you derefence a texture
+    //this should Array_Remove(texture); ... and then destroy it.
+  }
 }

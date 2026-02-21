@@ -21,7 +21,21 @@ FetchContent_MakeAvailable(SDL3)
 # add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 
 # Create your game executable target as usual
-add_executable(game main.c unittest.c array.c time.c vector.c transform.c object.c list.c texture.c sprite.c scene.c)
+add_executable(game
+	main.c
+	unittest.c
+	array.c
+	time.c
+	vector.c
+	transform.c
+	object.c
+	list.c
+	texture.c
+	sprite.c
+	usersprite.c
+	scene_test.c
+	scene_main.c
+)
 
 # Link to the actual SDL3 library.
 target_link_libraries(game 

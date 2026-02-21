@@ -96,7 +96,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     Time_Init();
     Texture_Init();
     Object_InitRoot();
-    Object_SetParent(Scene_CreateTestScene(), 0);
+    Object_SetParent(Scene_CreateMainScene(), 0);
 
 /*
     int i;
@@ -142,8 +142,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     //Handle Objects
     SDL_RenderClear(renderer);
-    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
-    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, render)); //render
+    UserSprite_DebugDraw();
+    //CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
+    //CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, render)); //render
+    //UserSprite_DebugDraw();
     SDL_RenderPresent(renderer);
 
     //Destroy Objects

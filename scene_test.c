@@ -67,8 +67,8 @@ void RenderText() {
 struct Object* Scene_CreateTestScene() {
   struct Texture* girlTexture = Texture_LoadPNG("girl.png");
   struct Object* scene = Object_Create(sizeof(struct Object));
-  struct Object* girlSprite = (struct Object*)Sprite_Create(girlTexture);
-  struct Object* girlSprite2 = (struct Object*)Sprite_Create(girlTexture);
+  struct Object* girlSprite = (struct Object*)Sprite_Create(girlTexture, 0, 0, 644, 910, 64, 91);
+  struct Object* girlSprite2 = (struct Object*)Sprite_Create(girlTexture, 0, 0, 644, 910, 64, 91);
   scene->update = Test_Update;
   Transform_LocalTranslate(&scene->transform, 100.0f, 100.0f);
   girlSprite2->update = UpdateText;

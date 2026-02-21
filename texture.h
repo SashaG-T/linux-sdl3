@@ -13,7 +13,9 @@ struct Texture {
 };
 
 struct Texture* Texture_LoadPNG(const char* filename);
-//struct Texture* Texture_Generate(..);
+struct Texture* Texture_Generate(void* userdata, void (*reload)(struct Texture* texture), void (*destroy)(struct Texture* texture));
+void Texture_Reference(struct Texture* texture);
+void Texture_Dereference(struct Texture* texture);
 
 void Texture_Init();
 void Texture_Cleanup();
