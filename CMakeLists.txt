@@ -33,6 +33,9 @@ add_executable(game
 	texture.c
 	sprite.c
 	usersprite.c
+	entity.c
+	entity_cursor.c
+	entity_grabbable.c
 	scene_test.c
 	scene_main.c
 )

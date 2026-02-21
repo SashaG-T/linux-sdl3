@@ -24,9 +24,8 @@ void defaultSpriteRender() {
     float rotation;
     Transform_GetPosition(&object->transform, &position);
     Transform_GetRotation(&object->transform, &rotation);
-    SDL_FPoint centre = {50.0f, 50.0f};
-    SDL_FRect dest = {position.x-centre.x, position.y-centre.y, sprite->dw, sprite->dh};
-    SDL_RenderTextureRotated(renderer, sprite->texture->texture, &sprite->src, &dest, (double)rotation, &centre, SDL_FLIP_NONE);
+    SDL_FRect dest = {position.x, position.y, sprite->dw, sprite->dh};
+    SDL_RenderTextureRotated(renderer, sprite->texture->texture, &sprite->src, &dest, (double)rotation, NULL, SDL_FLIP_NONE);
 }
 
 struct Sprite* Sprite_Create(struct Texture* texture, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int dw, unsigned int dh) {

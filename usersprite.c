@@ -23,6 +23,7 @@ typedef char RawSprite_t[64];
 
 unsigned int ColourTable[256] = {
   [' '] = 0x00000000,
+  ['.'] = 0x00000000,
   ['R'] = 0xff0000ff,
   ['W'] = 0xffffffff,
   ['w'] = 0xff7c7c7c,
@@ -74,7 +75,27 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
 "WwwWWWww"
 "WWWWwww."
 "wwww....",
-/*
+
+[CURSOR5]=
+"........"
+"........"
+"....wwww"
+"...wWWWw"
+"..wWWWWW"
+"..wWWwWW"
+"..wWWwWW"
+"..wwwwWW", 
+
+[CURSOR6]=
+"..wWWwWW"
+"..wWWwWW"
+"...wWWWW"
+"....wWWW"
+".....wWw"
+"......wW"
+"......ww"
+".......w",
+
 
   [SQUARE]=
   "11111111"
@@ -115,7 +136,7 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
   "   BBB  "
   "   B B  "
   "   2 2  ",
-*/
+
 /*
 ....RRR. ........
 ...R..R. ........
@@ -129,6 +150,24 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
 .RRR..R. .......R
 R...RR.. .......R
 RRR..... .....RR.
+...RR... .......R
+.....RR. RRR.R..R
+....R..R .......R
+....R... .....RR.
+.....RRR RRRRR...
+
+........ ........
+........ ........
+........ ........
+..RRRRRR RRR.....
+.R...... R..RRR..
+R..RR... ......R.
+R....R.. ..R..R.R
+RRRR..R. ..R..R.R
+
+R..R..R. .......R
+.R..RR.. .......R
+..R..... .....RR.
 ...RR... .......R
 .....RR. RRR.R..R
 ....R..R .......R
@@ -210,6 +249,6 @@ struct Sprite* UserSprite_Create(int id) {
   id = id % (spritePerWidth * spritePerWidth);
   x = (id % spritePerWidth) * 8;
   y = (id / spritePerWidth) * 8;
-  struct Sprite* sprite = Sprite_Create(texture, x, y, 8, 8, 256, 256);
+  struct Sprite* sprite = Sprite_Create(texture, x, y, 8, 8, 32, 32);
   return sprite;
 }

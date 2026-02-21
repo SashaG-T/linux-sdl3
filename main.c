@@ -95,6 +95,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     Time_Init();
     Texture_Init();
+    Entity_RegisterEvents();
     Object_InitRoot();
     Object_SetParent(Scene_CreateMainScene(), 0);
 
@@ -119,12 +120,16 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 }
 
 /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
-SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
+SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *sdlevent)
 {
-    if (event->type == SDL_EVENT_KEY_DOWN ||
-        event->type == SDL_EVENT_QUIT) {
+    if (sdlevent->type == SDL_EVENT_KEY_DOWN ||
+        sdlevent->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
+    } else {
+        event = sdlevent;
+        CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, onEvent)); //onEvent
     }
+
     #warning On video context change reload all textures
     //SDL_EVENT_RENDER_DEVICE_RESET
     //  - Destroy SDL_Renderer, SDL_Textures & Regen\load textures
@@ -142,9 +147,9 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     //Handle Objects
     SDL_RenderClear(renderer);
-    UserSprite_DebugDraw();
-    //CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
-    //CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, render)); //render
+    //UserSprite_DebugDraw();
+    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, update)); //update
+    CallObjectFuncRecursive(rootObjPtr, offsetof(struct Object, render)); //render
     //UserSprite_DebugDraw();
     SDL_RenderPresent(renderer);
 

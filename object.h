@@ -4,6 +4,7 @@
 #include "list.h"
 #include "transform.h"
 #include <stdlib.h>
+#include <SDL3/SDL.h>
 
 struct Object {
   struct LNode node;
@@ -19,10 +20,12 @@ struct Object {
   void (*update)();
   void (*render)();
   void (*destroy)();
+  void (*onEvent)();
 };
 
 extern struct Object* rootObjPtr;
 extern struct Object* object;
+extern SDL_Event* event;
 
 void Object_InitRoot();
 void Object_AddNewObjects();

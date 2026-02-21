@@ -43,6 +43,18 @@ void Transform_GetPosition(struct Transform* transform, struct Vector* out) {
   out->y = transform->position.y;
 }
 
+void Transform_SetLocalPosition(struct Transform* transform, float x, float y) {
+  transform->localPosition.x = x;
+  transform->localPosition.y = y;
+  transform->dirty = 1;
+}
+
+void Transform_SetPosition(struct Transform* transform, float x, float y) {
+  float dx = x - transform->position.x;
+  float dy = y - transform->position.y;
+  Transform_Translate(transform, dx, dy);
+}
+
 float Transform_GetRotation(struct Transform* transform, float* out) {
   *out = transform->rotation;
 }

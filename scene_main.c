@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "usersprite.h"
 #include "texture.h"
+#include "entity.h"
 
 #include <stdio.h>
 #include <SDL3/SDL.h>
@@ -17,10 +18,10 @@ struct Object* Scene_CreateMainScene() {
   scene->update = Main_Update;
   scene->flag.render = 1;
 
-  struct Sprite* cursorSprite = UserSprite_Create(CURSOR1);
-  Transform_LocalTranslate(&cursorSprite->object.transform, 100.0f, 100.0f);
+  struct Object* cursor = Entity_Create_Cursor();
+  Object_SetParent(cursor, scene);
 
-  Object_SetParent((struct Object*)cursorSprite, scene);
+  SDL_HideCursor();
 
   return scene;
 }

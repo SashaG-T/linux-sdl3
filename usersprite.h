@@ -4,16 +4,18 @@
 #include "sprite.h"
 
 enum UserSprite {
-/*
-  SQUARE,
-  GOBLIN,
-  MOUNTA,
-  FIELDS,
-*/
+
   CURSOR1,
   CURSOR2,
   CURSOR3,
   CURSOR4,
+  CURSOR5,
+  CURSOR6,
+
+  SQUARE,
+  GOBLIN,
+  MOUNTA,
+  FIELDS,
 
   USERSPRITE_COUNT
 };

@@ -5,6 +5,7 @@
 int _nextId = 0;
 struct Object* rootObjPtr = 0;
 struct Object* object = 0;
+SDL_Event* event;
 struct List nonParentedObjectList;
 
 void defaultUpdate() {
@@ -37,6 +38,7 @@ void Object_Init(struct Object* object) {
   object->update = 0; //defaultUpdate;
   object->render = 0;
   object->destroy = 0;
+  object->onEvent = 0;
 }
 
 struct Object* Object_Create(size_t size) {
