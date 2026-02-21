@@ -97,17 +97,48 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
 ".......w",
 
 
-  [SQUARE]=
-  "11111111"
-  "21111110"
-  "22111100"
-  "222  000"
-  "222  000"
-  "22333300"
-  "23333330"
-  "33333333",
+  [SQUARE1]=
+  "        "
+  " www  ww"
+  " w      "
+  " w      "
+  "        "
+  "        "
+  " w      "
+  " w      ",
 
-  [GOBLIN]=
+  [SQUARE2]=
+  "        "
+  "ww  www "
+  "      w "
+  "      w "
+  "        "
+  "        "
+  "      w "
+  "      w ",
+
+  [SQUARE3]=
+  " w      "
+  " w      "
+  "        "
+  "        "
+  " w      "
+  " w      "
+  " www  ww"
+  "        ",
+
+  [SQUARE4]=
+  "      w "
+  "      w "
+  "        "
+  "        "
+  "      w "
+  "      w "
+  "ww  www "
+  "        ",
+
+
+  [TREE]=
   "        "
   "   22   "
   "  2222  "
@@ -127,7 +158,7 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
   "23333330"
   "33333333",
 
-  [FIELDS]=
+  [GOBLIN]=
   "        "
   "   222  "
   "  2R2R2 "

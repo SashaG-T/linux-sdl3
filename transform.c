@@ -32,6 +32,11 @@ void Transform_Rotate(struct Transform* transform, float r) {
   transform->dirty = 1;
 }
 
+void Transform_SetRotation(struct Transform* transform, float r) {
+  transform->localRotation = r - transform->rotation;
+  transform->dirty = 1;
+}
+
 void Transform_LocalTranslate(struct Transform* transform, float x, float y) {
   transform->localPosition.x += x;
   transform->localPosition.y += y;

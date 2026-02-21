@@ -23,5 +23,6 @@ void Transform_SetPosition(struct Transform* transform, float x, float y);
 float Transform_GetRotation(struct Transform* transform, float* out);
 void Transform_GetLocalPosition(struct Transform* transform, struct Vector* out);
 float Transform_GetLocalRotation(struct Transform* transform, float* out);
+void Transform_SetRotation(struct Transform* transform, float r);
 
 #endif

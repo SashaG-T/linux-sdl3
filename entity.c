@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "global.h"
 #include <SDL3/SDL.h>
 
 unsigned int entityBaseEventId;

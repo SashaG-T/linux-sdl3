@@ -28,6 +28,7 @@ add_executable(game
 	time.c
 	vector.c
 	transform.c
+	collision.c
 	object.c
 	list.c
 	texture.c
@@ -36,6 +37,7 @@ add_executable(game
 	entity.c
 	entity_cursor.c
 	entity_grabbable.c
+	entity_cell.c
 	scene_test.c
 	scene_main.c
 )

@@ -4,13 +4,16 @@
 #include "object.h"
 
 enum EntityEventType {
+  NON_USER_EVENT,
   CURSOR_GRAB,
+  CURSOR_MOVE,
   CURSOR_DROP,
   ENTITY_EVENT_TYPE_COUNT
-}
+};
 
 struct Object* Entity_Create_Cursor();
-struct Object* Entity_Create_Grabbable();
+struct Object* Entity_Create_Grabbable(unsigned int width, unsigned int height);
+struct Object* Entity_Create_Cell(int x, int y);
 
 void Entity_RegisterEvents();
 int Entity_GetEventType(int eventType);

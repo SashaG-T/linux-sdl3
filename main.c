@@ -10,6 +10,7 @@
 #include "scene.h"
 #include "time.h"
 #include "texture.h"
+#include "entity.h"
 
 #include "unittest.h"
 

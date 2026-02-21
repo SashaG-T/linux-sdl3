@@ -12,10 +12,13 @@ enum UserSprite {
   CURSOR5,
   CURSOR6,
 
-  SQUARE,
-  GOBLIN,
+  SQUARE1,
+  SQUARE2,
+  SQUARE3,
+  SQUARE4,
+  TREE,
   MOUNTA,
-  FIELDS,
+  GOBLIN,
 
   USERSPRITE_COUNT
 };

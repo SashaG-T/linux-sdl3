@@ -1,6 +1,8 @@
 #include "entity.h"
 #include "usersprite.h"
 #include "global.h"
+#include "time.h"
+#include <math.h>
 
 struct CursorObject {
   struct Object object;
@@ -19,7 +21,7 @@ void Cursor_onEvent() {
       cursor->sprite[2]->object.flag.render = 0;
       cursor->sprite[4]->object.flag.render = 1;
       cursor->sprite[5]->object.flag.render = 1;
-      Entity_PushEvent(CURSOR_GRAB, 0, (void*)event->motion.x, (void*)event->motion.y);
+      Entity_PushEvent(CURSOR_GRAB, 0, (void*)&(cursor->object.transform.position.x), (void*)&(cursor->object.transform.position.y));
       break;
     }
     case SDL_EVENT_MOUSE_BUTTON_UP: {
@@ -27,12 +29,12 @@ void Cursor_onEvent() {
       cursor->sprite[2]->object.flag.render = 1;
       cursor->sprite[4]->object.flag.render = 0;
       cursor->sprite[5]->object.flag.render = 0;
-      Entity_PushEvent(CURSOR_DROP, 0, (void*)event->motion.x, (void*)event->motion.y);
+      Entity_PushEvent(CURSOR_DROP, 0, (void*)&(cursor->object.transform.position.x), (void*)&(cursor->object.transform.position.y));
       break;
     }
     case SDL_EVENT_MOUSE_MOTION: {
       Cursor_Move(cursor, event->motion.x, event->motion.y);
-      Entity_PushEvent(CURSOR_MOVE, 0, (void*)event->motion.x, (void*)event->motion.y);
+      Entity_PushEvent(CURSOR_MOVE, 0, (void*)&(cursor->object.transform.position.x), (void*)&(cursor->object.transform.position.y));
       break;
     }
     default: {}
@@ -54,12 +56,12 @@ struct Object* Entity_Create_Cursor() {
   cursor->sprite[4] = UserSprite_Create(CURSOR5);
   cursor->sprite[5] = UserSprite_Create(CURSOR6);
 
-  Object_SetParent((struct Object*)cursor->sprite[0], cursor);
-  Object_SetParent((struct Object*)cursor->sprite[1], cursor);
-  Object_SetParent((struct Object*)cursor->sprite[2], cursor);
-  Object_SetParent((struct Object*)cursor->sprite[3], cursor);
-  Object_SetParent((struct Object*)cursor->sprite[4], cursor);
-  Object_SetParent((struct Object*)cursor->sprite[5], cursor);
+  Object_SetParent((struct Object*)cursor->sprite[0], (struct Object*)cursor);
+  Object_SetParent((struct Object*)cursor->sprite[1], (struct Object*)cursor);
+  Object_SetParent((struct Object*)cursor->sprite[2], (struct Object*)cursor);
+  Object_SetParent((struct Object*)cursor->sprite[3], (struct Object*)cursor);
+  Object_SetParent((struct Object*)cursor->sprite[4], (struct Object*)cursor);
+  Object_SetParent((struct Object*)cursor->sprite[5], (struct Object*)cursor);
 
   cursor->sprite[0]->object.flag.render = 1;
   cursor->sprite[1]->object.flag.render = 1;
@@ -75,5 +77,5 @@ struct Object* Entity_Create_Cursor() {
   Transform_LocalTranslate(&(cursor->sprite[4]->object.transform), -16.0f, 0.0f);
   Transform_LocalTranslate(&(cursor->sprite[5]->object.transform), -16.0f, 32.0f);
 
-  return cursor;
+  return (struct Object*)cursor;
 }
