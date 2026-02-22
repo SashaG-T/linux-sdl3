@@ -32,6 +32,7 @@ unsigned int ColourTable[256] = {
   ['2'] = 0xff55ff55,
   ['3'] = 0xff007c00,
   ['B'] = 0xffff0000,
+  ['c'] = 0xffdddddd
 };
 
 RawSprite_t rawSprite[USERSPRITE_COUNT] = {
@@ -167,6 +168,126 @@ RawSprite_t rawSprite[USERSPRITE_COUNT] = {
   "   BBB  "
   "   B B  "
   "   2 2  ",
+
+  [CARD_BLANK]=
+  " wwwwwww"
+  "wWWWWWWW"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc",
+
+  [CARD_BLANK_2]=
+  "wwwwwww "
+  "WWWWWWWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw",
+
+  [CARD_BLANK_3]=
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWcccccc"
+  "wWWWWWWW"
+  " wwwwwww",
+
+  [CARD_BLANK_4]=
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "ccccccWw"
+  "WWWWWWWw"
+  "wwwwwww ",
+
+  [CARD_HOUSE]=
+  " wwwwwww"
+  "wWWWWWWW"
+  "wWcccccc"
+  "wWcccccR"
+  "wWccccRR"
+  "wWcccRRR"
+  "wWccRRRR"
+  "wWcRRRRR",
+
+  [CARD_HOUSE_2]=
+  "wwwwwww "
+  "WWWWWWWw"
+  "ccccccWw"
+  "RcccccWw"
+  "RRccccWw"
+  "RRRcccWw"
+  "RRRRccWw"
+  "RRRRRcWw",
+
+  [CARD_HOUSE_3]=
+  "wWRRRRRR"
+  "wWccRRRR"
+  "wWccRRRR"
+  "wWccRRRR"
+  "wWccRRRR"
+  "wWcccccc"
+  "wWWWWWWW"
+  " wwwwwww",
+
+  [CARD_HOUSE_4]=
+  "RRRRRRWw"
+  "RRRRccWw"
+  "RRRRccWw"
+  "RRRRccWw"
+  "RRRRccWw"
+  "ccccccWw"
+  "WWWWWWWw"
+  "wwwwwww ",
+  
+  [CARD_FIELD]=
+  " wwwwwww"
+  "wWWWWWWW"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000",
+
+  [CARD_FIELD_2]=
+  "wwwwwww "
+  "WWWWWWWw"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww",
+
+  [CARD_FIELD_3]=
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wW000000"
+  "wWWWWWWW"
+  " wwwwwww",
+
+  [CARD_FIELD_4]=
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "000000Ww"
+  "WWWWWWWw"
+  "wwwwwww ",
 
 /*
 ....RRR. ........

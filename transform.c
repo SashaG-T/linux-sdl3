@@ -1,4 +1,5 @@
 #include "transform.h"
+#include "object.h"
 
 void Transform_Init(struct Transform* transform) {
   transform->localPosition = (struct Vector){0.0f, 0.0f};
@@ -29,6 +30,7 @@ void Transform_Translate(struct Transform* transform, float x, float y) {
 
 void Transform_Rotate(struct Transform* transform, float r) {
   transform->localRotation += r;
+  transform->rotation += r;
   transform->dirty = 1;
 }
 
@@ -40,6 +42,9 @@ void Transform_SetRotation(struct Transform* transform, float r) {
 void Transform_LocalTranslate(struct Transform* transform, float x, float y) {
   transform->localPosition.x += x;
   transform->localPosition.y += y;
+  struct Vector t = {x, y};
+  Vector_Rotate(&t, -transform->rotation, &t);
+  Vector_Add(&(transform->position), &t, &(transform->position));
   transform->dirty = 1;
 }
 
@@ -49,8 +54,11 @@ void Transform_GetPosition(struct Transform* transform, struct Vector* out) {
 }
 
 void Transform_SetLocalPosition(struct Transform* transform, float x, float y) {
+  struct Vector t = {x - transform->localPosition.x, y - transform->localPosition.y};
   transform->localPosition.x = x;
   transform->localPosition.y = y;
+  Vector_Rotate(&t, -transform->rotation, &t);
+  Vector_Add(&(transform->position), &t, &(transform->position));
   transform->dirty = 1;
 }
 

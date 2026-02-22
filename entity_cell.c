@@ -1,16 +1,38 @@
 #include "entity.h"
 #include "usersprite.h"
 #include "global.h"
-
-struct CellObject {
-  struct Object object;
-  struct Sprite* sprite[4];
-};
+#include "collision.h"
 
 void Cell_onEvent() {
+  if(!object->flag.render) {
+    return;
+  }
   struct CellObject* cell = (struct CellObject*)object;
   switch(Entity_GetEventType(event->type)) {
-    //we'll be listening for Grabbable events
+    case CARD_GRAB: {
+      if(!cell->card) {
+        break;
+      }
+      struct CardEvent* cardEvent = (struct CardEvent*)event->user.data1;
+      struct CardObject* grabbedCard = cardEvent->card;
+      if(cell->card == grabbedCard) {
+        Entity_Cell_DetachCard(cell);
+      }
+      break;
+    }
+    case CARD_DROP: {
+      if(cell->card) {
+        break;
+      }
+      struct CardEvent* cardEvent = (struct CardEvent*)event->user.data1;
+      struct CardObject* droppedCard = cardEvent->card;
+      struct Vector* p = &(droppedCard->grabbable.object.transform.position);
+      struct Vector* c = &(cell->object.transform.position);
+      if(Collision_PointInAABB(p->x+32, p->y+32, c->x, c->y, 64, 64)) {
+        Entity_Cell_AttachCard(cell, droppedCard);
+      }
+      break;
+    }
     case NON_USER_EVENT:
     default: {}
   }
@@ -20,6 +42,8 @@ struct Object* Entity_Create_Cell(int x, int y) {
   struct CellObject* cell = (struct CellObject*)Object_Create(sizeof(struct CellObject));
   cell->object.flag.render = 1;
   cell->object.onEvent = Cell_onEvent;
+  cell->card = 0;
+  cell->locking = 0;
 
   Transform_LocalTranslate(&cell->object.transform, (float)x, (float)y);
 
@@ -45,4 +69,22 @@ struct Object* Entity_Create_Cell(int x, int y) {
   Transform_LocalTranslate(&(cell->sprite[3]->object.transform), 32.0f, 32.0f);
 
   return (struct Object*)cell;
+}
+
+void Entity_Cell_AttachCard(struct CellObject* cell, struct CardObject* card) {
+  struct Vector* c = &(cell->object.transform.position);
+  card->grabbable.isGrabbable = !cell->locking;
+  cell->card = card;
+  Transform_SetPosition(&(card->grabbable.object.transform), c->x, c->y);
+  Entity_PushEvent(CELL_CARD_ATTACHED, 0, (void*)cell, (void*)card);
+}
+
+void Entity_Cell_DetachCard(struct CellObject* cell) {
+  struct CardObject* card = cell->card;
+  if(!card) {
+    return;
+  }
+  cell->card = 0;
+  card->grabbable.isGrabbable = 1;
+  Entity_PushEvent(CELL_CARD_DETACHED, 0, (void*)cell, (void*)card);
 }

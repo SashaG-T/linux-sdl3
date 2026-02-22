@@ -10,6 +10,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_BUILD_TYPE Debug)
 
 # This assumes the SDL source is available in vendored/SDL
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 FetchContent_Declare(
 	SDL3
 	GIT_REPOSITORY 	https://github.com/libsdl-org/SDL.git
@@ -38,6 +39,9 @@ add_executable(game
 	entity_cursor.c
 	entity_grabbable.c
 	entity_cell.c
+        entity_grid.c
+        entity_card.c
+        entity_hand.c
 	scene_test.c
 	scene_main.c
 )

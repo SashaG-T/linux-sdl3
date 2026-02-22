@@ -4,11 +4,6 @@
 #include "time.h"
 #include <math.h>
 
-struct CursorObject {
-  struct Object object;
-  struct Sprite* sprite[6];
-};
-
 void Cursor_Move(struct CursorObject* cursor, int x, int y) {
   Transform_SetPosition(&(cursor->object.transform), (float)x, (float)y);
 }

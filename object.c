@@ -33,6 +33,7 @@ void Object_Init(struct Object* object) {
   Transform_Init(&object->transform);
   object->flag.destroy = 0;
   object->flag.render  = 0;
+  object->flag.active  = 1;
   List_Init(&object->childList);
   object->newParent = 0;
   object->update = 0; //defaultUpdate;
@@ -89,6 +90,10 @@ void Object_ResolveReparenting() {
 
 void Object_SetParent(struct Object* objectPtr, struct Object* parent) {
   objectPtr->newParent = parent ? parent : rootObjPtr;
+}
+
+void Object_SetActive(struct Object* objectPtr, int isActive) {
+  objectPtr->flag.active = isActive;
 }
 
 void Object_PrintDebugInfo(struct Object* object) {

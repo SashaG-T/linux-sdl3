@@ -28,6 +28,9 @@ void CallObjectFuncRecursive(struct Object* objectPtr, size_t funcOffset) {
     if(objectPtr == 0) {
         return;
     }
+    if(!objectPtr->flag.active) {
+        return;
+    }
     //call on self
     object = objectPtr;
     CallObjectFunc(objectPtr, funcOffset);

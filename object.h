@@ -15,8 +15,10 @@ struct Object {
   struct Flags {
     unsigned destroy 	: 1;
     unsigned render  	: 1;
+    unsigned active     : 1;
   } flag;
   struct Object* newParent;
+  struct Object* parent;
   void (*update)();
   void (*render)();
   void (*destroy)();
@@ -34,6 +36,7 @@ struct Object* Object_Create(size_t size);
 void Object_Destroy(struct Object* object);
 
 void Object_SetParent(struct Object* objectPtr, struct Object* parent);
+void Object_SetActive(struct Object* objectPtr, int isActive);
 
 void Object_PrintDebugInfo(struct Object* object);
 
